@@ -1,4 +1,6 @@
 /dist
+.env
+ecosystem.config.js
 
 # Logs
 logs
