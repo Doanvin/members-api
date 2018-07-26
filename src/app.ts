@@ -1,9 +1,7 @@
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-// import * as cors from 'cors';
+// import * as bodyParser from 'body-parser';
 import * as statusControl from './controllers/status';
 require('dotenv').config();
-console.log(process.env);
 
 const app = express();
 app.use(function(req, res, next) {
@@ -12,7 +10,7 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('port', process.env.PORT || 8081);
 

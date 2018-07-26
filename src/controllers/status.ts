@@ -1,25 +1,49 @@
 import { Request, Response } from 'express';
-import { Client } from 'pg';
+import  { Client } from 'pg';
+import * as Joi from 'joi';
+
+
+
 
 
 export let members = (req: Request, res: Response) => {
-    console.log('post body ', req.params);
-    const query = req.params.q;
-    const client = new Client();
-    client.connect()
-    .then( () => {
-        console.log('connection completed $1', query);
-        // query the database
-        const sql = 'SELECT * FROM voting_list WHERE first_name ~* "^$1" UNION SELECT * FROM invalid_address WHERE first_name ~* "^$1" LIMIT 7;'
-        const params = [query];
-        client.query(sql, params);
+    const query = { name: req.query['q'] };
+    const schema = { name: Joi.string().regex(/^[a-z ,.'-]+$/i) };
+    
+    // validate user input
+    const validation = Joi.validate(query, schema);
+    if (validation.error) {
+        return res.status(400).send(validation.error.details[0].message);
+    }
 
-    })
-    .then( (result) => {
-        console.log('result: ', result);
-        res.send(result)
-    })
-    .catch(err => console.log(err))
+    // create new client
+    const client = new Client();
+
+    // connect to the db
+    client.connect();
+    client.on('error', err => console.error('error connecting to db!', err.stack));
+    
+    // assemble the db query
+    const params = {
+        text: `SELECT * FROM voting_list WHERE first_name ~* '^${query.name}' UNION SELECT * FROM invalid_address WHERE first_name ~* '^${query.name}' LIMIT 7;`
+    };
+
+    // query the db
+    client.query(params, (queryError, queryResult) => {
+        if (queryError) {
+            console.error(queryError.stack)
+        } else {
+            console.log('db queried');
+            res.send(queryResult.rows);
+        }
+        
+        // diconnect from the db
+        client.end()
+        .then( () => console.log('client has disconnected'))
+        .catch( err => console.error('error during disconnection', err.stack));
+    });
+
+
     
 }
 
@@ -28,5 +52,5 @@ export let memberId = (req: Request, res: Response) => {
 }
 
 export let hi = (req: Request, res: Response) => {
-    res.send('Response!!!');
+    res.send('HI!!!!');
 }

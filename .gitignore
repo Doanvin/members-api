@@ -1,6 +1,7 @@
 /dist
 .env
 ecosystem.config.js
+table.txt
 
 # Logs
 logs
