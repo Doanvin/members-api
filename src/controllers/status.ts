@@ -1,15 +1,12 @@
 import { Request, Response } from 'express';
-import  { Client } from 'pg';
+import { Client } from 'pg';
 import * as Joi from 'joi';
-
-
-
 
 
 export let members = (req: Request, res: Response) => {
     const query = { name: req.query['q'] };
     const schema = { name: Joi.string().regex(/^[a-z ,.'-]+$/i) };
-    
+
     // validate user input
     const validation = Joi.validate(query, schema);
     if (validation.error) {
@@ -22,7 +19,7 @@ export let members = (req: Request, res: Response) => {
     // connect to the db
     client.connect();
     client.on('error', err => console.error('error connecting to db!', err.stack));
-    
+
     // assemble the db query
     const params = {
         text: `SELECT * FROM voting_list WHERE first_name ~* '^${query.name}' UNION SELECT * FROM invalid_address WHERE first_name ~* '^${query.name}' LIMIT 7;`
@@ -36,15 +33,12 @@ export let members = (req: Request, res: Response) => {
             console.log('db queried');
             res.send(queryResult.rows);
         }
-        
+
         // diconnect from the db
         client.end()
-        .then( () => console.log('client has disconnected'))
-        .catch( err => console.error('error during disconnection', err.stack));
+            .then(() => console.log('client has disconnected'))
+            .catch(err => console.error('error during disconnection', err.stack));
     });
-
-
-    
 }
 
 export let memberId = (req: Request, res: Response) => {
