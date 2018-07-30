@@ -17,8 +17,8 @@ export let members = (req: Request, res: Response) => {
     const client = new Client();
 
     // connect to the db
-    client.connect();
-    client.on('error', err => console.error('error connecting to db!', err.stack));
+    client.connect()
+    .catch(err => res.status(500).send(`error connecting to db! \n${err.stack}`));
 
     // assemble the db query
     const params = {
