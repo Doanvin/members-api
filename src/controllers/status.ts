@@ -22,7 +22,7 @@ export let members = (req: Request, res: Response) => {
 
     // assemble the db query
     const params = {
-        text: `SELECT * FROM voting_list WHERE first_name ~* '^${query.name}' UNION SELECT * FROM invalid_address WHERE first_name ~* '^${query.name}' LIMIT 7;`
+        text: `SELECT * FROM voting_list WHERE first_name ~* '^${query.name}' UNION SELECT * FROM invalid_address WHERE first_name ~* '^${query.name}' LIMIT 10;`
     };
 
     // query the db

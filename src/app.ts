@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set('port', process.env.PORT || 8081);
+app.set('port', process.env.SFTHCC_PORT || 8081);
 
 app.get('/', statusControl.hi);
 app.get('/api/members', statusControl.members);
