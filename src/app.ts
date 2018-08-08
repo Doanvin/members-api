@@ -1,5 +1,5 @@
 import * as express from 'express';
-// import * as bodyParser from 'body-parser';
+import * as bodyParser from 'body-parser';
 import * as statusControl from './controllers/status';
 require('dotenv').config();
 
@@ -10,12 +10,15 @@ app.use(function(req, res, next) {
     next();
   });
 
-// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.json());
 
-app.set('port', process.env.SFTHCC_PORT || 8081);
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.set('port', process.env.SFTHCC_PORT || 8082);
+app.set('env', process.env.NODE_ENV);
 
 app.get('/', statusControl.hi);
 app.get('/api/members', statusControl.members);
-app.get('/api/members/:id', statusControl.memberId);
+app.put('/api/members/:id', statusControl.membersId);
 
 export default app;
