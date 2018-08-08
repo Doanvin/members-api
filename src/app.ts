@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('port', process.env.SFTHCC_PORT || 8082);
 app.set('env', process.env.NODE_ENV);
 
-app.get('/', statusControl.hi);
-app.get('/api/members', statusControl.members);
-app.put('/api/members/:id', statusControl.membersId);
+app.get('/api/members/full-name', statusControl.membersFullName);
+app.get('/api/members/first-name', statusControl.membersFirstName);
+app.put('/api/members/update-address/:id', statusControl.membersUpdateAddress);
 
 export default app;
