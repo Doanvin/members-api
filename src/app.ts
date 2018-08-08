@@ -19,6 +19,6 @@ app.set('env', process.env.NODE_ENV);
 
 app.get('/api/members/full-name', statusControl.membersFullName);
 app.get('/api/members/first-name', statusControl.membersFirstName);
-app.put('/api/members/update-address/:id', statusControl.membersUpdateAddress);
+app.put('/api/members/update-address', statusControl.membersUpdateAddress);
 
 export default app;
