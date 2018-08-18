@@ -14,8 +14,9 @@ No CORS. Endpoints can only be accessed from sfthcc.org.
 Example Request
 `https://sfthcc.org/api/members/first-name?q=don`
 
-Example Response
-```[
+Example Response <object []>
+```
+[
     {
         "ccid": string,
         "last_name": string,
@@ -32,7 +33,8 @@ Example Response
         "suffix": string,
         "valid_address": boolean
     }
-]```
+]
+```
 
 ### /api/members/full-name
 * Method: GET
@@ -53,12 +55,13 @@ Example Response <object []>
         "suffix": string,
         "valid_address": boolean
     }
-]```
+]
+```
 
 ### /api/members/update-address
 * Method: PUT
 * Request Body: 
-- {
+```{
         ccid: members ccid/ tribal enrollment number
         first_name: members first name *required
         middle_name: members middle name
@@ -72,6 +75,7 @@ Example Response <object []>
         state: members state *required
         zip_code: members zip code *required
 }
+```
 
 Example Response
 `Address Successfully Updated`
