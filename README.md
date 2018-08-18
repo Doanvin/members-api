@@ -12,7 +12,9 @@ No CORS. Endpoints can only be accessed from sfthcc.org.
     * q: persons first name
 
 Example Request
-`https://sfthcc.org/api/members/first-name?q=don`
+```
+https://sfthcc.org/api/members/first-name?q=don
+```
 
 Example Response <object []>
 ```
@@ -43,7 +45,9 @@ Example Response <object []>
     * last_name: persons last name
 
 Example Request
-`https://sfthcc.org/api/members/full-name?first_name=donavin&last_name=hannon`
+```
+https://sfthcc.org/api/members/full-name?first_name=donavin&last_name=hannon
+```
 
 Example Response <object []>
 ```
@@ -81,5 +85,7 @@ Example Request
 ```
 
 Example Response
-`Address Successfully Updated`
+```
+Address Successfully Updated
+```
 
