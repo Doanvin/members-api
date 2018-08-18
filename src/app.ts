@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
     next();
   });
 
-// app.use(express.json());
+app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 

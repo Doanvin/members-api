@@ -22,7 +22,7 @@ export let membersFirstName = (req: Request, res: Response) => {
 
     // assemble the db query
     const params = {
-        text: `SELECT * FROM members WHERE first_name ~* '^${query.name}';`
+        text: `SELECT * FROM members WHERE first_name ~* '^${query.name}' order by first_name asc;`
     };
 
     // query the db
@@ -140,7 +140,8 @@ export let membersFullName = (req: Request, res: Response) => {
     const params = {
         text: `SELECT * FROM members 
                WHERE first_name ILIKE '${query.first_name}'
-               AND last_name ~* '^${query.last_name}';`
+               AND last_name ~* '^${query.last_name}'
+               ORDER BY first_name ASC;`
     };
 
     // query the db

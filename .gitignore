@@ -1,4 +1,5 @@
 /dist
+/query
 .env
 ecosystem.config.js
 table.txt
