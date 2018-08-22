@@ -141,7 +141,7 @@ export let membersFullName = (req: Request, res: Response) => {
         text: `SELECT * FROM members 
                WHERE first_name ILIKE '${query.first_name}'
                AND last_name ~* '^${query.last_name}'
-               ORDER BY first_name ASC;`
+               ORDER BY last_name ASC;`
     };
 
     // query the db
